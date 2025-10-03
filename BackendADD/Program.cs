@@ -1,4 +1,5 @@
 using BackendADD.Data;
+using BackendADD.Middleware;
 using BackendADD.Models;
 using BackendADD.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,10 @@ var cs = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseMySql(cs, ServerVersion.AutoDetect(cs)));
 
+// Registrar Repositorios
 builder.Services.AddScoped<ILotteryTypeRepository, LotteryTypeRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ILotteryEventRepository, LotteryEventRepository>();
 
 
 builder.Services.AddControllers();
@@ -43,6 +47,9 @@ builder.Services.AddControllers()
     });
 
 var app = builder.Build();
+
+app.UseApiErrorHandling();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
