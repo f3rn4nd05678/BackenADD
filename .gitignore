@@ -1,0 +1,42 @@
+# --- .NET / VS
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+[Bb]in/
+[Oo]bj/
+[TestResults]/
+*.Cache/
+*.ide/
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+*.ncrunchsolution
+*.ncrunchproject
+
+# Publish / logs
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Ll]og/
+*.log
+
+# Rider / VSCode
+.idea/
+.vscode/
+
+# --- Node / React / Vite
+node_modules/
+dist/
+build/
+coverage/
+*.local
+*.cache
+
+# Env / secrets
+.env
+.env.*
+!.env.example
