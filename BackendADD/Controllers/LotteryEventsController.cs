@@ -12,13 +12,16 @@ public class LotteryEventsController : ControllerBase
 {
     private readonly ILotteryEventRepository _repo;
     private readonly ILotteryTypeRepository _typeRepo;
+    private readonly IBetRepository _betRepo;
 
     public LotteryEventsController(
         ILotteryEventRepository repo,
-        ILotteryTypeRepository typeRepo)
+        ILotteryTypeRepository typeRepo,
+        IBetRepository betRepo)
     {
         _repo = repo;
         _typeRepo = typeRepo;
+        _betRepo = betRepo;
     }
 
     [HttpGet]
@@ -66,10 +69,12 @@ public class LotteryEventsController : ControllerBase
     {
         var lotteryType = await _typeRepo.GetByIdAsync(dto.LotteryTypeId);
         if (lotteryType is null)
-            return this.ApiBadRequest("Tipo de lotería no encontrado", new { field = "lotteryTypeId" });
+            return this.ApiBadRequest("Tipo de lotería no encontrado",
+                new { field = "lotteryTypeId" });
 
         if (!lotteryType.IsActive)
-            return this.ApiBadRequest("El tipo de lotería no está activo", new { field = "lotteryTypeId" });
+            return this.ApiBadRequest("El tipo de lotería no está activo",
+                new { field = "lotteryTypeId" });
 
         var entity = new LotteryEvent
         {
@@ -126,6 +131,10 @@ public class LotteryEventsController : ControllerBase
         var evt = await _repo.GetByIdAsync(id);
         if (evt is null) return this.ApiNotFound("Evento no encontrado");
 
+        if (evt.State != EventState.PROGRAMMED)
+            return this.ApiBadRequest("Solo eventos programados pueden abrirse",
+                new { currentState = evt.State.ToString() });
+
         evt.State = EventState.OPEN;
         await _repo.UpdateAsync(evt);
         await _repo.SaveAsync();
@@ -141,6 +150,10 @@ public class LotteryEventsController : ControllerBase
         var evt = await _repo.GetByIdAsync(id);
         if (evt is null) return this.ApiNotFound("Evento no encontrado");
 
+        if (evt.State != EventState.OPEN)
+            return this.ApiBadRequest("Solo eventos abiertos pueden cerrarse",
+                new { currentState = evt.State.ToString() });
+
         evt.State = EventState.CLOSED;
         await _repo.UpdateAsync(evt);
         await _repo.SaveAsync();
@@ -149,12 +162,16 @@ public class LotteryEventsController : ControllerBase
     }
 
     [HttpPut("{id}/publish-results")]
-    [ProducesResponseType(typeof(ApiResponse<LotteryEvent>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<PublishResultsResponseDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object?>), 400)]
     public async Task<IActionResult> PublishResults(ulong id, [FromBody] PublishResultsDto dto)
     {
         var evt = await _repo.GetByIdAsync(id);
         if (evt is null) return this.ApiNotFound("Evento no encontrado");
+
+        if (evt.State != EventState.CLOSED)
+            return this.ApiBadRequest("Solo eventos cerrados pueden publicar resultados",
+                new { currentState = evt.State.ToString() });
 
         if (dto.WinningNumber < 0 || dto.WinningNumber > 99)
             return this.ApiBadRequest("Número ganador debe estar entre 00 y 99",
@@ -165,8 +182,30 @@ public class LotteryEventsController : ControllerBase
         evt.ResultsPublishedAt = DateTime.UtcNow;
 
         await _repo.UpdateAsync(evt);
+
+        // Actualizar estado de apuestas ganadoras a WIN_PENDING
+        var bets = await _betRepo.GetAllAsync(eventId: id, state: BetState.ISSUED);
+        int winnersCount = 0;
+
+        foreach (var bet in bets)
+        {
+            if (bet.NumberPlayed == dto.WinningNumber)
+            {
+                bet.State = BetState.WIN_PENDING;
+                await _betRepo.UpdateAsync(bet);
+                winnersCount++;
+            }
+        }
+
         await _repo.SaveAsync();
 
-        return this.ApiOk(evt, "Resultados publicados");
+        var response = new PublishResultsResponseDto(
+            evt.Id,
+            evt.WinningNumber.Value,
+            winnersCount,
+            winnersCount == 0 ? "Sorteo desierto - No hubo ganadores" : $"{winnersCount} ganador(es)"
+        );
+
+        return this.ApiOk(response, "Resultados publicados exitosamente");
     }
 }

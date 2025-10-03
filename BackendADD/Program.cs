@@ -11,15 +11,29 @@ var cs = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseMySql(cs, ServerVersion.AutoDetect(cs)));
 
-// Registrar Repositorios
+// ===== Registrar TODOS los Repositorios =====
 builder.Services.AddScoped<ILotteryTypeRepository, LotteryTypeRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ILotteryEventRepository, LotteryEventRepository>();
+builder.Services.AddScoped<IBetRepository, BetRepository>();
+builder.Services.AddScoped<IPayoutRepository, PayoutRepository>();
+builder.Services.AddScoped<IAppSettingsRepository, AppSettingsRepository>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
+// Servicio en background para gestión automática de estados
+builder.Services.AddHostedService<BackendADD.Services.EventStateService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new()
+    {
+        Title = "La Suerte API",
+        Version = "v1",
+        Description = "API para gestión de sorteos y apuestas"
+    });
+});
 
 // CORS para Vite
 builder.Services.AddCors(opt => {
@@ -29,6 +43,7 @@ builder.Services.AddCors(opt => {
         .AllowAnyMethod());
 });
 
+// Configuración de validación de modelos
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
     {
@@ -48,11 +63,18 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
+// Middleware personalizado
 app.UseApiErrorHandling();
 
+// Swagger en desarrollo y producción
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "La Suerte API v1");
+    c.RoutePrefix = "swagger";
+});
 
 app.UseCors("vite");
 app.MapControllers();
+
 app.Run();
