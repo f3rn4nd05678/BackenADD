@@ -70,7 +70,7 @@ public class BetsController : ControllerBase
                 new { field = "amount" });
 
         // Validar número
-        if (dto.NumberPlayed < 0 || dto.NumberPlayed > 99)
+        if (dto.NumberPlayed > 99)
             return this.ApiBadRequest("Número debe estar entre 00 y 99",
                 new { field = "numberPlayed" });
 
@@ -97,7 +97,7 @@ public class BetsController : ControllerBase
             UserId = dto.UserId,
             NumberPlayed = dto.NumberPlayed,
             Amount = dto.Amount,
-            QrToken = Guid.NewGuid().ToString(),
+            QrToken = Guid.NewGuid().ToString(), // Generar aquí en C#
             State = BetState.ISSUED
         };
 

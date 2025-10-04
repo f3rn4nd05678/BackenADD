@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using BackendADD.Models;
-using System.Data;
 
 namespace BackendADD.Data;
 
@@ -21,26 +21,22 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
-        // DateOnly/TimeOnly -> MySQL 'date'/'time'
-        mb.Entity<LotteryEvent>()
-          .Property(e => e.EventDate).HasColumnType("date");
-        mb.Entity<LotteryEvent>()
-          .Property(e => e.OpenTime).HasColumnType("time");
-        mb.Entity<LotteryEvent>()
-          .Property(e => e.CloseTime).HasColumnType("time");
+        // NO aplicar convenciones automáticas
+        // En su lugar, configurar manualmente las entidades principales
 
-        mb.Entity<LotteryEvent>()
-          .HasIndex(e => new { e.LotteryTypeId, e.EventDate, e.EventNumberOfDay })
-          .IsUnique();
+        // LotteryEvent
+        mb.Entity<LotteryEvent>(entity =>
+        {
+            entity.ToTable("lottery_events");
+            entity.Property(e => e.EventDate).HasColumnType("date").HasColumnName("event_date");
+            entity.Property(e => e.OpenTime).HasColumnType("time").HasColumnName("open_time");
+            entity.Property(e => e.CloseTime).HasColumnType("time").HasColumnName("close_time");
+        });
 
-        mb.Entity<Bet>()
-          .HasIndex(b => new { b.EventId, b.NumberPlayed });
-
-        mb.Entity<Bet>()
-          .HasIndex(b => b.QrToken).IsUnique();
-
+        // UserRole - composite key
         mb.Entity<UserRole>().HasKey(x => new { x.UserId, x.RoleId });
 
+        // AppSetting
         mb.Entity<AppSetting>(e =>
         {
             e.ToTable("app_settings");
@@ -48,6 +44,5 @@ public class AppDbContext : DbContext
             e.Property(x => x.K).HasColumnName("k").HasMaxLength(100);
             e.Property(x => x.V).HasColumnName("v").HasMaxLength(255).IsRequired();
         });
-
     }
 }
