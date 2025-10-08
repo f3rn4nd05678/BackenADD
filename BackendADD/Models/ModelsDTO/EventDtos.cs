@@ -1,10 +1,6 @@
-﻿namespace BackendADD.Models.ModelsDTO
+﻿namespace BackendADD.Dtos;
 
-
-{
-    public class EventDtos
-    {
-        public record WinnerDto(
+public record WinnerDto(
     ulong BetId,
     string CustomerName,
     byte ChosenNumber,
@@ -15,28 +11,18 @@
     bool IsBirthday
 );
 
-        public record EventStatsDto(
-            int TotalBets,
-            decimal TotalRevenue,
-            int UniqueCustomers,
-            int TotalWinners,
-            decimal AverageBetAmount,
-            List<NumberDistributionDto> NumberDistribution
-        );
+public record EventStatsDto(
+    int TotalBets,
+    decimal TotalRevenue,
+    int UniqueCustomers,
+    int TotalWinners,
+    decimal AverageBetAmount,
+    List<NumberDistributionDto> NumberDistribution
+);
 
-        public record NumberDistributionDto(
-            byte Number,
-            int Count,
-            decimal TotalAmount
-        );
+public record NumberDistributionDto(
+    byte Number,
+    int Count,
+    decimal TotalAmount
+);
 
-        public record PublishResultsDto(byte WinningNumber);
-
-        public record PublishResultsResponseDto(
-            ulong EventId,
-            byte WinningNumber,
-            int WinnersCount,
-            string Message
-        );
-    }
-}

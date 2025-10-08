@@ -218,7 +218,7 @@ public class LotteryEventsController : ControllerBase
         if (evt is null) return this.ApiNotFound("Evento no encontrado");
 
         if (evt.State != EventState.RESULTS_PUBLISHED)
-            return this.ApiBadRequest("Los resultados aún no han sido publicados");
+            return this.ApiBadRequest<object?>("Los resultados aún no han sido publicados");
 
         // Obtener todas las apuestas ganadoras
         var winningBets = await _betRepo.GetAllAsync(eventId: id, state: BetState.WIN_PENDING);
