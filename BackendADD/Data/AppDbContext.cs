@@ -19,30 +19,51 @@ public class AppDbContext : DbContext
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<AppSetting> AppSettings => Set<AppSetting>();
 
+
     protected override void OnModelCreating(ModelBuilder mb)
     {
-        // NO aplicar convenciones automáticas
-        // En su lugar, configurar manualmente las entidades principales
+        base.OnModelCreating(mb);
 
-        // LotteryEvent
+        // LotteryEvent - configurar tipos de fecha y hora
         mb.Entity<LotteryEvent>(entity =>
         {
             entity.ToTable("lottery_events");
-            entity.Property(e => e.EventDate).HasColumnType("date").HasColumnName("event_date");
-            entity.Property(e => e.OpenTime).HasColumnType("time").HasColumnName("open_time");
-            entity.Property(e => e.CloseTime).HasColumnType("time").HasColumnName("close_time");
+            entity.Property(e => e.EventDate).HasColumnType("date");
+            entity.Property(e => e.OpenTime).HasColumnType("time");
+            entity.Property(e => e.CloseTime).HasColumnType("time");
+            // Convertir ENUM a string para EventState
+            entity.Property(e => e.State)
+                .HasConversion<string>()
+                .HasMaxLength(50);
+        });
+
+        // Bet - configurar qr_token y state
+        mb.Entity<Bet>(entity =>
+        {
+            entity.ToTable("bets");
+            entity.Property(e => e.QrToken)
+                .HasMaxLength(36)
+                .IsRequired();
+            // Convertir ENUM a string para BetState
+            entity.Property(e => e.State)
+                .HasConversion<string>()
+                .HasMaxLength(50);
         });
 
         // UserRole - composite key
-        mb.Entity<UserRole>().HasKey(x => new { x.UserId, x.RoleId });
+        mb.Entity<UserRole>(entity =>
+        {
+            entity.ToTable("user_roles");
+            entity.HasKey(x => new { x.UserId, x.RoleId });
+        });
 
         // AppSetting
-        mb.Entity<AppSetting>(e =>
+        mb.Entity<AppSetting>(entity =>
         {
-            e.ToTable("app_settings");
-            e.HasKey(x => x.K);
-            e.Property(x => x.K).HasColumnName("k").HasMaxLength(100);
-            e.Property(x => x.V).HasColumnName("v").HasMaxLength(255).IsRequired();
+            entity.ToTable("app_settings");
+            entity.HasKey(x => x.K);
+            entity.Property(x => x.K).HasMaxLength(100);
+            entity.Property(x => x.V).HasMaxLength(255).IsRequired();
         });
     }
 }

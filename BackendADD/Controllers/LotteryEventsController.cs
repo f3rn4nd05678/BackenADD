@@ -208,4 +208,90 @@ public class LotteryEventsController : ControllerBase
 
         return this.ApiOk(response, "Resultados publicados exitosamente");
     }
+
+    [HttpGet("{id}/winners")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<WinnerDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object?>), 404)]
+    public async Task<IActionResult> GetWinners(ulong id)
+    {
+        var evt = await _repo.GetByIdAsync(id);
+        if (evt is null) return this.ApiNotFound("Evento no encontrado");
+
+        if (evt.State != EventState.RESULTS_PUBLISHED)
+            return this.ApiBadRequest("Los resultados aún no han sido publicados");
+
+        // Obtener todas las apuestas ganadoras
+        var winningBets = await _betRepo.GetAllAsync(eventId: id, state: BetState.WIN_PENDING);
+
+        var winners = new List<WinnerDto>();
+
+        foreach (var bet in winningBets)
+        {
+            var customer = await _betRepo.GetCustomerAsync(bet.CustomerId);
+            if (customer is null) continue;
+
+            // Calcular premio con bonus de cumpleaños si aplica
+            var isBirthday = customer.BirthDate.HasValue &&
+                customer.BirthDate.Value.Month == evt.EventDate.Month &&
+                customer.BirthDate.Value.Day == evt.EventDate.Day;
+
+            var lotteryType = await _typeRepo.GetByIdAsync(evt.LotteryTypeId);
+            var basePrize = bet.Amount * (lotteryType?.PayoutFactor ?? 0);
+            var bonus = isBirthday ? basePrize * 0.10m : 0;
+            var totalPrize = basePrize + bonus;
+
+            winners.Add(new WinnerDto(
+                bet.Id,
+                customer.FullName,
+                bet.NumberPlayed,
+                bet.Amount,
+                basePrize,
+                bonus,
+                totalPrize,
+                isBirthday
+            ));
+        }
+
+        if (winners.Count == 0)
+            return this.ApiOk(new List<WinnerDto>(), "Ganador desierto - No hubo ganadores");
+
+        return this.ApiOk(winners, $"Se encontraron {winners.Count} ganador(es)");
+    }
+
+    [HttpGet("{id}/stats")]
+    [ProducesResponseType(typeof(ApiResponse<EventStatsDto>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object?>), 404)]
+    public async Task<IActionResult> GetStats(ulong id)
+    {
+        var evt = await _repo.GetByIdAsync(id);
+        if (evt is null) return this.ApiNotFound("Evento no encontrado");
+
+        // Obtener todas las apuestas del evento
+        var bets = await _betRepo.GetAllAsync(eventId: id);
+
+        var totalBets = bets.Count;
+        var totalRevenue = bets.Sum(b => b.Amount);
+        var uniqueCustomers = bets.Select(b => b.CustomerId).Distinct().Count();
+
+        // Contar ganadores
+        var winners = bets.Count(b => b.State == BetState.WIN_PENDING || b.State == BetState.PAID);
+
+        // Distribución de números apostados
+        var numberDistribution = bets
+            .GroupBy(b => b.NumberPlayed)
+            .Select(g => new NumberDistributionDto(g.Key, g.Count(), g.Sum(b => b.Amount)))
+            .OrderByDescending(n => n.Count)
+            .ToList();
+
+        var stats = new EventStatsDto(
+            totalBets,
+            totalRevenue,
+            uniqueCustomers,
+            winners,
+            totalBets > 0 ? totalRevenue / totalBets : 0,
+            numberDistribution
+        );
+
+        return this.ApiOk(stats, "Estadísticas del evento");
+    }
 }

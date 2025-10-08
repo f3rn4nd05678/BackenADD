@@ -18,6 +18,7 @@ public interface IBetRepository
     Task<Bet> AddAsync(Bet entity);
     Task UpdateAsync(Bet entity);
     Task SaveAsync();
+    Task<Customer?> GetCustomerAsync(ulong customerId);
 }
 
 public class BetRepository : IBetRepository
@@ -266,4 +267,9 @@ public class BetRepository : IBetRepository
     }
 
     public Task SaveAsync() => _db.SaveChangesAsync();
+
+    public async Task<Customer?> GetCustomerAsync(ulong customerId)
+    {
+        return await _db.Customers.FindAsync(customerId);
+    }
 }
