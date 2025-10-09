@@ -1,8 +1,10 @@
-﻿using BackendADD.Dtos;
+﻿using BackendADD.Data;
+using BackendADD.Dtos;
 using BackendADD.Infrastructure;
 using BackendADD.Models;
 using BackendADD.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendADD.Controllers;
 
@@ -11,8 +13,13 @@ namespace BackendADD.Controllers;
 public class CustomersController : ControllerBase
 {
     private readonly ICustomerRepository _repo;
+    private readonly AppDbContext _db; 
 
-    public CustomersController(ICustomerRepository repo) => _repo = repo;
+    public CustomersController(ICustomerRepository repo, AppDbContext db)
+    {
+        _repo = repo;
+        _db = db;
+    }
 
     [HttpGet]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<Customer>>), 200)]
@@ -56,7 +63,8 @@ public class CustomersController : ControllerBase
             Phone = dto.Phone?.Trim(),
             Email = dto.Email?.Trim(),
             BirthDate = dto.BirthDate,
-            Address = dto.Address?.Trim()
+            Address = dto.Address?.Trim(),
+            IsActive = true
         };
 
         await _repo.AddAsync(entity);
@@ -101,14 +109,62 @@ public class CustomersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(ApiResponse<object?>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object?>), 404)]
+    [ProducesResponseType(typeof(ApiResponse<object?>), 400)]
     public async Task<IActionResult> Delete(ulong id)
     {
         var customer = await _repo.GetByIdAsync(id);
-        if (customer is null) return this.ApiNotFound("Cliente no encontrado");
+        if (customer is null)
+            return this.ApiNotFound("Cliente no encontrado");
 
-        await _repo.DeleteAsync(customer);
+
+        var hasActiveBets = await _db.Bets
+            .AnyAsync(b => b.CustomerId == id && b.State != BetState.EXPIRED);
+
+        if (hasActiveBets)
+        {
+            return this.ApiBadRequest(
+                "No se puede eliminar el cliente porque tiene apuestas activas",
+                new { customerId = id }
+            );
+        }
+
+  
+        customer.IsActive = false;
+        await _repo.UpdateAsync(customer);
         await _repo.SaveAsync();
 
-        return this.ApiOk<object?>(null, "Cliente eliminado");
+        return this.ApiOk<object?>(null, "Cliente deshabilitado exitosamente");
+    }
+
+
+    [HttpPut("{id}/reactivate")]
+    [ProducesResponseType(typeof(ApiResponse<Customer>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object?>), 404)]
+    public async Task<IActionResult> Reactivate(ulong id)
+    {
+        var customer = await _repo.GetByIdAsync(id);
+        if (customer is null)
+            return this.ApiNotFound("Cliente no encontrado");
+
+        customer.IsActive = true;
+        await _repo.UpdateAsync(customer);
+        await _repo.SaveAsync();
+
+        return this.ApiOk(customer, "Cliente reactivado exitosamente");
+    }
+
+
+    [HttpGet("inactive")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<Customer>>), 200)]
+    public async Task<IActionResult> GetInactive()
+    {
+        var inactiveCustomers = await _db.Customers
+            .Where(c => c.IsActive == false)
+            .OrderBy(c => c.FullName)
+            .ToListAsync();
+
+        return this.ApiOk(inactiveCustomers, "Clientes inactivos");
     }
 }

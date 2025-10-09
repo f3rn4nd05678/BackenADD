@@ -22,19 +22,19 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<List<Customer>> GetAllAsync(string? search = null)
     {
-        var query = _db.Customers.AsQueryable();
+        var q = _db.Customers
+            .Where(c => c.IsActive == true) 
+            .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(search))
         {
-            search = search.Trim().ToLower();
-            query = query.Where(c =>
-                c.FullName.ToLower().Contains(search) ||
-                (c.Phone != null && c.Phone.Contains(search)) ||
-                (c.Email != null && c.Email.ToLower().Contains(search))
-            );
+            search = search.ToLower();
+            q = q.Where(c => c.FullName.ToLower().Contains(search)
+                          || (c.Phone != null && c.Phone.Contains(search))
+                          || (c.Email != null && c.Email.ToLower().Contains(search)));
         }
 
-        return await query.OrderBy(c => c.FullName).ToListAsync();
+        return await q.OrderBy(c => c.FullName).ToListAsync();
     }
 
     public Task<Customer?> GetByIdAsync(ulong id)
@@ -42,8 +42,9 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<Customer?> GetByPhoneAsync(string phone)
     {
-        if (string.IsNullOrWhiteSpace(phone)) return null;
-        return await _db.Customers.FirstOrDefaultAsync(c => c.Phone == phone);
+        return await _db.Customers
+            .Where(c => c.IsActive == true && c.Phone == phone)
+            .FirstOrDefaultAsync();
     }
 
     public async Task<Customer> AddAsync(Customer entity)

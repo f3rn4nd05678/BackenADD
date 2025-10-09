@@ -50,6 +50,7 @@ public class UserRole
     public ulong RoleId { get; set; }
 }
 
+
 [Table("customers")]
 public class Customer
 {
@@ -72,10 +73,12 @@ public class Customer
     [Column("address")]
     public string? Address { get; set; }
 
+    [Column("is_active")]
+    public bool IsActive { get; set; } = true;
+
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
-
 [Table("lottery_types")]
 public class LotteryType
 {
