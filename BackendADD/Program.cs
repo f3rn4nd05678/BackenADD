@@ -20,6 +20,7 @@ builder.Services.AddScoped<IPayoutRepository, PayoutRepository>();
 builder.Services.AddScoped<IAppSettingsRepository, AppSettingsRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
+
 // Servicio en background para gestión automática de estados
 builder.Services.AddHostedService<BackendADD.Services.EventStateService>();
 

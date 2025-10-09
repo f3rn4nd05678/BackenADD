@@ -25,7 +25,42 @@ public class ReportsController : ControllerBase
     {
         var report = await _repo.GetCollectionReportAsync(
             startDate, endDate, lotteryTypeId, eventNumberOfDay);
-        return this.ApiOk(report, "Reporte de recaudación");
+
+        // Traducir estados al español
+        var translatedDetails = report.EventDetails.Select(e => new EventCollectionDto(
+            e.EventId,
+            e.LotteryTypeName,
+            e.EventDate,
+            e.EventNumberOfDay,
+            e.TotalCollected,
+            e.TotalBets,
+            TranslateState(e.State)
+        )).ToList();
+
+        var translatedReport = new CollectionReportDto(
+            report.StartDate,
+            report.EndDate,
+            report.LotteryTypeName,
+            report.EventNumber,
+            report.TotalCollected,
+            report.TotalBets,
+            report.AverageBetAmount,
+            translatedDetails
+        );
+
+        return this.ApiOk(translatedReport, "Reporte de recaudación");
+    }
+
+    private string TranslateState(string state)
+    {
+        return state switch
+        {
+            "PROGRAMMED" => "Programado",
+            "OPEN" => "Abierto",
+            "CLOSED" => "Cerrado",
+            "RESULTS_PUBLISHED" => "Completado",
+            _ => state
+        };
     }
 
     // Recaudación diaria (para gráfica de barras)

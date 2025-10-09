@@ -99,4 +99,16 @@ public class CustomersController : ControllerBase
         var result = new BirthdayCheckDto(customer.Id, customer.FullName, isBirthday);
         return this.ApiOk(result, isBirthday ? "¡Es su cumpleaños!" : "No es su cumpleaños");
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(ulong id)
+    {
+        var customer = await _repo.GetByIdAsync(id);
+        if (customer is null) return this.ApiNotFound("Cliente no encontrado");
+
+        await _repo.DeleteAsync(customer);
+        await _repo.SaveAsync();
+
+        return this.ApiOk<object?>(null, "Cliente eliminado");
+    }
 }
