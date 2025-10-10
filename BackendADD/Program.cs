@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // ============================================
-// CONFIGURACIÓN DE CORS
+// CORS - ACTUALIZAR CON LA NUEVA IP
 // ============================================
 builder.Services.AddCors(options =>
 {
@@ -14,7 +14,8 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
                 "http://localhost:5173",
                 "http://127.0.0.1:5173",
-                "http://192.168.0.10:5173"
+                "http://192.168.0.4:5173",        // ? TU NUEVA IP
+                "http://192.168.56.1:5173"
             )
             .AllowAnyMethod()
             .AllowAnyHeader()
@@ -22,22 +23,17 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(5044); // Escuchar en todas las IPs
-});
+// URLs de escucha
+builder.WebHost.UseUrls("http://0.0.0.0:5044");
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Database
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Repositories
 builder.Services.AddScoped<ILotteryTypeRepository, LotteryTypeRepository>();
 builder.Services.AddScoped<ILotteryEventRepository, LotteryEventRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -47,19 +43,16 @@ builder.Services.AddScoped<IAppSettingsRepository, AppSettingsRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+// app.UseHttpsRedirection();  // ? DEBE ESTAR COMENTADO
 
-app.UseCors("AllowAll");
-
+app.UseCors("AllowAll");  // ? ANTES de UseAuthorization
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
