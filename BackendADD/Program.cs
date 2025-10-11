@@ -41,25 +41,13 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 // ========== REPOSITORIES ==========
-// Autenticación y Usuarios
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-// Loterías y Eventos
 builder.Services.AddScoped<ILotteryTypeRepository, LotteryTypeRepository>();
 builder.Services.AddScoped<ILotteryEventRepository, LotteryEventRepository>();
-
-// Clientes y Apuestas
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IBetRepository, BetRepository>();
-
-// Pagos y Reportes
-builder.Services.AddScoped<IPayoutRepository, PayoutRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
-
-// Auditoría y Configuración
-builder.Services.AddScoped<IAuditRepository, AuditRepository>();
 builder.Services.AddScoped<IAppSettingsRepository, AppSettingsRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>(); // ? Usuario
 
 // ========== CORS ==========
 builder.Services.AddCors(options =>
@@ -82,24 +70,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "La Suerte API",
-        Version = "v1",
-        Description = "API para el sistema de loterías La Suerte"
-    });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "La Suerte API", Version = "v1" });
 
     // Configurar JWT en Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = @"JWT Authorization header usando el esquema Bearer. 
-                      Ingresa 'Bearer' [espacio] y luego tu token.
-                      Ejemplo: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'",
+        Description = "JWT Authorization header usando el esquema Bearer. Ejemplo: \"Bearer {token}\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT"
+        Scheme = "Bearer"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -118,27 +98,18 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// ========== BUILD APP ==========
 var app = builder.Build();
 
 // ========== MIDDLEWARE ==========
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "La Suerte API v1");
-        c.RoutePrefix = string.Empty; // Swagger en la raíz
-    });
+    app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
-
-// IMPORTANTE: UseAuthentication debe ir antes de UseAuthorization
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

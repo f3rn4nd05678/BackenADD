@@ -42,8 +42,8 @@ public class AuthController : ControllerBase
             return Unauthorized(ApiResponse<object?>.Fail("Credenciales inválidas", null, 401));
         }
 
-        // Verificar contraseña con BCrypt
-        if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+        // Verificar contraseña (aquí debes usar tu método de hashing)
+        if (!VerifyPassword(dto.Password, user.PasswordHash))
         {
             return Unauthorized(ApiResponse<object?>.Fail("Credenciales inválidas", null, 401));
         }
@@ -67,12 +67,11 @@ public class AuthController : ControllerBase
     [HttpGet("me")]
     [Authorize]
     [ProducesResponseType(typeof(ApiResponse<UserInfoDto>), 200)]
-    [ProducesResponseType(typeof(ApiResponse<object?>), 401)]
     public async Task<IActionResult> GetCurrentUser()
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        if (string.IsNullOrEmpty(userIdClaim) || !ulong.TryParse(userIdClaim, out var userId))
+        if (userIdClaim == null || !ulong.TryParse(userIdClaim, out var userId))
         {
             return Unauthorized(ApiResponse<object?>.Fail("Token inválido", null, 401));
         }
@@ -92,45 +91,18 @@ public class AuthController : ControllerBase
             Role = user.Role.ToString()
         };
 
-        return this.ApiOk(userInfo, "Información del usuario");
+        return this.ApiOk(userInfo, "Usuario actual");
     }
 
-    [HttpPost("refresh")]
+    [HttpPost("logout")]
     [Authorize]
-    [ProducesResponseType(typeof(ApiResponse<LoginResponseDto>), 200)]
-    [ProducesResponseType(typeof(ApiResponse<object?>), 401)]
-    public async Task<IActionResult> RefreshToken()
+    [ProducesResponseType(typeof(ApiResponse<object?>), 200)]
+    public IActionResult Logout()
     {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        if (string.IsNullOrEmpty(userIdClaim) || !ulong.TryParse(userIdClaim, out var userId))
-        {
-            return Unauthorized(ApiResponse<object?>.Fail("Token inválido", null, 401));
-        }
-
-        var user = await _userRepo.GetByIdAsync(userId);
-
-        if (user == null || !user.IsActive)
-        {
-            return Unauthorized(ApiResponse<object?>.Fail("Usuario no encontrado o inactivo", null, 401));
-        }
-
-        var token = GenerateJwtToken(user);
-
-        var response = new LoginResponseDto
-        {
-            Token = token,
-            UserId = user.UserId,
-            Username = user.Username,
-            FullName = user.FullName,
-            Role = user.Role.ToString(),
-            ExpiresAt = DateTime.UtcNow.AddHours(8)
-        };
-
-        return this.ApiOk(response, "Token renovado exitosamente");
+        // En implementación con JWT, el logout se maneja en el cliente
+        // Aquí podrías agregar el token a una lista negra si lo deseas
+        return this.ApiOk<object?>(null, "Logout exitoso");
     }
-
-    // ============ MÉTODOS PRIVADOS ============
 
     private string GenerateJwtToken(User user)
     {
@@ -145,8 +117,8 @@ public class AuthController : ControllerBase
         {
             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.GivenName, user.FullName),
-            new Claim(ClaimTypes.Role, user.Role.ToString())
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
+            new Claim("FullName", user.FullName)
         };
 
         var token = new JwtSecurityToken(
@@ -158,5 +130,12 @@ public class AuthController : ControllerBase
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    private bool VerifyPassword(string password, string passwordHash)
+    {
+        // IMPORTANTE: Implementa tu lógica de verificación de hash
+        // Por ahora, comparación simple (CAMBIAR EN PRODUCCIÓN)
+        return BCrypt.Net.BCrypt.Verify(password, passwordHash);
     }
 }
