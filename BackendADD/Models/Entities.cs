@@ -14,41 +14,7 @@ public class Role
     public string Name { get; set; } = null!;
 }
 
-[Table("users")]
-public class User
-{
-    [Key]
-    [Column("id")]
-    public ulong Id { get; set; }
 
-    [Column("username")]
-    public string Username { get; set; } = null!;
-
-    [Column("full_name")]
-    public string FullName { get; set; } = null!;
-
-    [Column("email")]
-    public string? Email { get; set; }
-
-    [Column("password_hash")]
-    public string PasswordHash { get; set; } = "";
-
-    [Column("is_active")]
-    public bool IsActive { get; set; } = true;
-
-    [Column("created_at")]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-}
-
-[Table("user_roles")]
-public class UserRole
-{
-    [Column("user_id")]
-    public ulong UserId { get; set; }
-
-    [Column("role_id")]
-    public ulong RoleId { get; set; }
-}
 
 
 [Table("customers")]
