@@ -3,6 +3,42 @@
   "WorkspaceRootPath": "C:\\Users\\ferna\\source\\repos\\BackendADD\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\repositories\\irepositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\repositories\\irepositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\models\\modelsdto\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\models\\modelsdto\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\betscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\betscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -11,24 +47,12 @@
       "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\repositories\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\lotteryeventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\lotteryeventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\models\\modelsdto\\eventdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\models\\modelsdto\\eventdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\payoutscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,10 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\controllers\\betscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\controllers\\betscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\models\\entities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -61,10 +81,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\repositories\\betrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\repositories\\betrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|solutionrelative:backendadd\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E784F79-21FB-492C-BDBA-88AE7A3A0E8A}|BackendADD\\BackendADD.csproj|c:\\users\\ferna\\source\\repos\\backendadd\\backendadd\\infrastructure\\eventstateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -134,24 +150,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 30,
+          "SelectedChildIndex": 31,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\IRepositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "BackendADD\\Repositories\\IRepositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\IRepositories\\UserRepository.cs*",
+              "RelativeToolTip": "BackendADD\\Repositories\\IRepositories\\UserRepository.cs*",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T15:57:16.846Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\User.cs",
+              "RelativeDocumentMoniker": "BackendADD\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\User.cs",
+              "RelativeToolTip": "BackendADD\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T15:56:40.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "AuthDtos.cs",
+              "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\AuthDtos.cs",
+              "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\AuthDtos.cs",
+              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\AuthDtos.cs",
+              "RelativeToolTip": "BackendADD\\Models\\ModelsDTO\\AuthDtos.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T15:56:08.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "BackendADD\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\AuthController.cs*",
+              "RelativeToolTip": "BackendADD\\Controllers\\AuthController.cs*",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAwwIAAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T04:55:46.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "BackendADD\\Properties\\launchSettings.json",
               "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Properties\\launchSettings.json",
               "RelativeToolTip": "BackendADD\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAowBUAAAASAAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAADwvxIAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-10-09T02:19:25.773Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "EventDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\EventDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\EventDtos.cs",
@@ -164,7 +232,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "EventStateService.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Infrastructure\\EventStateService.cs",
               "RelativeDocumentMoniker": "BackendADD\\Infrastructure\\EventStateService.cs",
@@ -176,7 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "ReportRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\ReportRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\ReportRepository.cs",
@@ -189,7 +257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "ReportDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\ReportDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\ReportDtos.cs",
@@ -201,20 +269,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ReportsController.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\ReportsController.cs",
               "RelativeDocumentMoniker": "BackendADD\\Controllers\\ReportsController.cs",
               "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\ReportsController.cs",
               "RelativeToolTip": "BackendADD\\Controllers\\ReportsController.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAowC4AAAAkAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAowCEAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-03T04:26:01.898Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "PayoutRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\PayoutRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\PayoutRepository.cs",
@@ -226,7 +294,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "PayoutDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\PayoutDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\PayoutDtos.cs",
@@ -238,7 +306,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "PayoutsController.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\PayoutsController.cs",
               "RelativeDocumentMoniker": "BackendADD\\Controllers\\PayoutsController.cs",
@@ -250,7 +318,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "AppSettingsRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\AppSettingsRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\AppSettingsRepository.cs",
@@ -262,7 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "BetRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\BetRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\BetRepository.cs",
@@ -274,7 +342,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "BetDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\BetDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\BetDtos.cs",
@@ -286,7 +354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
               "Title": "BetsController.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\BetsController.cs",
               "RelativeDocumentMoniker": "BackendADD\\Controllers\\BetsController.cs",
@@ -294,11 +362,12 @@
               "RelativeToolTip": "BackendADD\\Controllers\\BetsController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-03T04:22:43.752Z"
+              "WhenOpened": "2025-10-03T04:22:43.752Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "LotteryEventRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\LotteryEventRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\LotteryEventRepository.cs",
@@ -310,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "LotteryEventDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\LotteryEventDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\LotteryEventDtos.cs",
@@ -322,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "LotteryEventsController.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\LotteryEventsController.cs",
               "RelativeDocumentMoniker": "BackendADD\\Controllers\\LotteryEventsController.cs",
@@ -335,7 +404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "CustomerRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\CustomerRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\CustomerRepository.cs",
@@ -347,7 +416,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "CustomerDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\CustomerDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\CustomerDtos.cs",
@@ -359,7 +428,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "CustomersController.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\CustomersController.cs",
               "RelativeDocumentMoniker": "BackendADD\\Controllers\\CustomersController.cs",
@@ -371,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "ErrorHandlingMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Middleware\\ErrorHandlingMiddleware.cs",
               "RelativeDocumentMoniker": "BackendADD\\Middleware\\ErrorHandlingMiddleware.cs",
@@ -383,7 +452,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "ApiResults.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Infrastructure\\ApiResults.cs",
               "RelativeDocumentMoniker": "BackendADD\\Infrastructure\\ApiResults.cs",
@@ -395,7 +464,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "ApiResponse.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ApiResponse.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ApiResponse.cs",
@@ -407,7 +476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "AppSetting.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\AppSetting.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\AppSetting.cs",
@@ -419,7 +488,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "BackendADD.csproj",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\BackendADD.csproj",
               "RelativeDocumentMoniker": "BackendADD\\BackendADD.csproj",
@@ -431,7 +500,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "LotteryTypesController.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Controllers\\LotteryTypesController.cs",
               "RelativeDocumentMoniker": "BackendADD\\Controllers\\LotteryTypesController.cs",
@@ -443,7 +512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "LotteryTypesDtos.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\ModelsDTO\\LotteryTypesDtos.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\ModelsDTO\\LotteryTypesDtos.cs",
@@ -455,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "LotteryTypeRepository.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Repositories\\LotteryTypeRepository.cs",
               "RelativeDocumentMoniker": "BackendADD\\Repositories\\LotteryTypeRepository.cs",
@@ -467,20 +536,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Program.cs",
               "RelativeDocumentMoniker": "BackendADD\\Program.cs",
-              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Program.cs",
-              "RelativeToolTip": "BackendADD\\Program.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAwwCwAAAAaAAAA",
+              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Program.cs*",
+              "RelativeToolTip": "BackendADD\\Program.cs*",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAwwGcAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-03T02:58:27.675Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "Entities.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Models\\Entities.cs",
               "RelativeDocumentMoniker": "BackendADD\\Models\\Entities.cs",
@@ -492,19 +561,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 1,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "BackendADD\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "BackendADD\\Data\\AppDbContext.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAqwEMAAAAFAAAA",
+              "ToolTip": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\Data\\AppDbContext.cs*",
+              "RelativeToolTip": "BackendADD\\Data\\AppDbContext.cs*",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAtwBQAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-03T02:57:45.203Z"
+              "WhenOpened": "2025-10-03T02:57:45.203Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\ferna\\source\\repos\\BackendADD\\BackendADD\\appsettings.json",
               "RelativeDocumentMoniker": "BackendADD\\appsettings.json",

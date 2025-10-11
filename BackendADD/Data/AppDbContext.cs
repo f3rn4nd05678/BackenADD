@@ -18,6 +18,7 @@ public class AppDbContext : DbContext
     public DbSet<Payout> Payouts => Set<Payout>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<AppSetting> AppSettings => Set<AppSetting>();
+    public DbSet<User> Users { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder mb)
