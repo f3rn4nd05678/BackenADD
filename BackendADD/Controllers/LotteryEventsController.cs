@@ -220,8 +220,15 @@ public class LotteryEventsController : ControllerBase
         if (evt.State != EventState.RESULTS_PUBLISHED)
             return this.ApiBadRequest<object?>("Los resultados aún no han sido publicados");
 
-        // Obtener todas las apuestas ganadoras
-        var winningBets = await _betRepo.GetAllAsync(eventId: id, state: BetState.WIN_PENDING);
+        // ✅ FIX: Obtener TODAS las apuestas del evento y filtrar las ganadoras
+        var allBets = await _betRepo.GetAllAsync(eventId: id);
+
+        // Filtrar solo las apuestas que coinciden con el número ganador
+        // e incluir TANTO WIN_PENDING como PAID
+        var winningBets = allBets
+            .Where(b => b.NumberPlayed == evt.WinningNumber.Value &&
+                        (b.State == BetState.WIN_PENDING || b.State == BetState.PAID))
+            .ToList();
 
         var winners = new List<WinnerDto>();
 
@@ -240,6 +247,7 @@ public class LotteryEventsController : ControllerBase
             var bonus = isBirthday ? basePrize * 0.10m : 0;
             var totalPrize = basePrize + bonus;
 
+            // ✅ Incluir el estado en el DTO
             winners.Add(new WinnerDto(
                 bet.Id,
                 customer.FullName,
@@ -248,7 +256,8 @@ public class LotteryEventsController : ControllerBase
                 basePrize,
                 bonus,
                 totalPrize,
-                isBirthday
+                isBirthday,
+                bet.State  // ✅ NUEVO: Agregar el estado
             ));
         }
 
