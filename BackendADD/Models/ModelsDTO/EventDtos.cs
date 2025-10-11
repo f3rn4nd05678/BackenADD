@@ -1,4 +1,6 @@
-﻿namespace BackendADD.Dtos;
+﻿using BackendADD.Models;
+
+namespace BackendADD.Dtos;
 
 public record WinnerDto(
     ulong BetId,
@@ -8,7 +10,8 @@ public record WinnerDto(
     decimal BasePrize,
     decimal BirthdayBonus,
     decimal TotalPrize,
-    bool IsBirthday
+    bool IsBirthday,
+    BetState State 
 );
 
 public record EventStatsDto(

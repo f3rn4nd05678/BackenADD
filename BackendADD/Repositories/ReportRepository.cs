@@ -175,7 +175,6 @@ public class ReportRepository : IReportRepository
     {
         var events = await _db.LotteryEvents
             .Where(e => e.EventDate == date)
-            .Include(e => e.LotteryTypeId)
             .ToListAsync();
 
         var eventIds = events.Select(e => e.Id).ToList();
