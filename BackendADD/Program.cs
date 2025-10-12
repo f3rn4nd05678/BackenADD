@@ -1,6 +1,10 @@
 using BackendADD.Data;
 using BackendADD.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +16,7 @@ if (!builder.Environment.IsDevelopment())
 {
     // Si Nginx termina TLS, deja SOLO HTTP interno:
     builder.WebHost.UseUrls("http://0.0.0.0:5044");
-
-    // Si prefieres que la app también escuche HTTPS directo en el server
-    // (requiere cert real), descomenta:
+    // Si quieres además HTTPS directo (con cert real), descomenta:
     // builder.WebHost.UseUrls("http://0.0.0.0:5044", "https://0.0.0.0:7173");
 }
 
@@ -33,17 +35,17 @@ builder.Services.AddCors(options =>
                 "http://192.168.0.4:5173",
                 "http://192.168.56.1:5173",
 
-                // IP pública (por si accedes directo)
+                // IP pública
                 "http://54.235.57.150",
                 "https://54.235.57.150",
 
-                // Tu dominio (sin paths; NO /dashboard)
+                // Dominio
                 "http://lasuerte.work.gd",
                 "https://lasuerte.work.gd"
             )
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials();
+            .AllowCredentials(); // solo si usas cookies/credenciales
     });
 });
 
@@ -52,18 +54,51 @@ builder.Services.AddCors(options =>
 // ======================
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 // ======================
-// DB Context
+// DB Context (mantén "Default" como en tu appsettings)
 // ======================
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // ======================
+// JWT Auth
+// ======================
+var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new InvalidOperationException("Jwt:Key no configurada");
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "LaSuerteAPI";
+var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "LaSuerteClient";
+
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        // Detrás de Nginx en HTTP interno:
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+// ======================
 // Repositorios
 // ======================
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ILotteryTypeRepository, LotteryTypeRepository>();
 builder.Services.AddScoped<ILotteryEventRepository, LotteryEventRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -72,11 +107,39 @@ builder.Services.AddScoped<IPayoutRepository, PayoutRepository>();
 builder.Services.AddScoped<IAppSettingsRepository, AppSettingsRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
+// ======================
+// Swagger (siempre activo) + esquema Bearer
+// ======================
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "BackendADD", Version = "v1" });
+
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Description = "Autorización JWT con esquema Bearer. Ej: 'Bearer {token}'",
+        Reference = new OpenApiReference
+        {
+            Id = "Bearer",
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
+
 var app = builder.Build();
 
 // ================================================
 // Swagger: activo siempre y con endpoint relativo
-// (así sirve bien tanto en http como en https)
 // ================================================
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -85,18 +148,18 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 });
 
-// Opcional: página de errores detallada en DEV
+// Opcional: errores detallados solo en DEV
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 
-// IMPORTANTE: No fuerces redirección a HTTPS si estás detrás de Nginx,
-// porque puede romper llamadas internas http->https.
+// IMPORTANTE: sin HTTPS redirection si estás detrás de Nginx
 // app.UseHttpsRedirection();
 
-app.UseCors("AllowAll");     // Antes de Auth
-app.UseAuthorization();
+app.UseCors("AllowAll");     // CORS antes de Auth
+app.UseAuthentication();     // Luego autenticación
+app.UseAuthorization();      // Luego autorización
 
 app.MapControllers();
 

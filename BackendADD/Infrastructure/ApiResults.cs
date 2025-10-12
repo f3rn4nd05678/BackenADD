@@ -20,4 +20,7 @@ public static class ApiResults
 
     public static IActionResult ApiNotFound(this ControllerBase c, string msg = "Not found")
         => c.ToResult(ApiResponse<object?>.Fail(msg, null, 404));
+
+    public static IActionResult ApiUnauthorized(this ControllerBase c, string msg = "No autorizado")
+        => c.ToResult(ApiResponse<object?>.Fail(msg, null, 401));
 }
